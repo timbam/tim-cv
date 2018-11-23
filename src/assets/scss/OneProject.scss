@@ -1,0 +1,27 @@
+.OneProject {
+  margin: 40px 5px;
+  // text-align: center;
+  display: flex;
+  .leftSide {
+    // float: left;
+    img {
+      position: relative;
+      width: 300px;
+      // height: 100%;
+    }
+  }
+  .rightSide {
+    // float: right;
+    text-align: left;
+    width: 600px;
+    border-radius: 5px;
+    background-color: #b1ecfe2e;
+    p {
+      margin: 20px;
+    }
+    h4 {
+      margin: 20px;
+    }
+  }
+
+}

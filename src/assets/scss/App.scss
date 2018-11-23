@@ -1,9 +1,44 @@
+// Global variables
+$col-h3: #0e2953;
+$fontFam: helvetica, arial, sans-serif;
+// Imports
+@import 'Frontpage';
+@import 'Projects';
+@import 'OneProject';
+@import 'Courses';
+
+body {
+  margin: 0;
+}
+h2.title {
+  color: $col-h3;
+  font-size: 2em;
+}
 .app {
-  font-family: helvetica, arial, sans-serif;
+  font-family: $fontFam;
   // padding: 2em;
   // border: 5px solid red;
 
   p {
     // background-color: ;
   }
+}
+
+
+.triangle {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    border-right: 10px solid;
+    border-bottom: 10px solid;
+    border-color: #da322ddb;
+    height: 30px;
+    width: 30px;
+    transform: rotate(45deg);
+}
+.triangle:hover {
+  color: #da322ddb;
+  border-right: 12px solid;
+  border-bottom: 12px solid;
+  cursor: pointer;
 }
