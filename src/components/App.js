@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+// import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 import Frontpage from './Frontpage';
 import Projects from './Projects';
@@ -19,14 +19,14 @@ class App extends React.PureComponent {
 
   componentDidMount() {
     Events.scrollEvent.register('begin', (to, element) => {
-      console.log('begin', arguments);
+      // console.log('begin', arguments);
       this.setState({
         scrolling: true
       });
     });
 
     Events.scrollEvent.register('end', (to, element) => {
-      console.log('end', arguments);
+      // console.log('end', arguments);
       this.setState({
         scrolling: false
       });
@@ -54,7 +54,8 @@ class App extends React.PureComponent {
     //   console.log("yoyo")
     //   clearTimeout(timeOut);
     // }
-    console.log(e.srcElement.scrollingElement)
+
+    // console.log(e.srcElement.scrollingElement)
     // console.log(clientHeight);
     // console.log(scrollHeight);
   }
@@ -66,7 +67,7 @@ class App extends React.PureComponent {
   scrollToElement(element) {
     console.log(element);
     let e = document.getElementById(element);
-    console.log(e.scrollTop)
+    // console.log(e.scrollTop)
     e.scrollIntoView({
       behavior : "smooth"
     });
