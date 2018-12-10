@@ -1,8 +1,15 @@
-.Projects {
+.About {
   width: 100%;
   color: $col-text;
   position: relative;
   text-align: center;
   display: inline-block;
   min-height: 100vh;
+}
+
+.textAbout {
+  max-width: 600px;
+  text-align: left;
+  display: inline-block;
+  margin: 0 40px 0 40px;
 }

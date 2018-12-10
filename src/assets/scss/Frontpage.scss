@@ -1,3 +1,6 @@
+$diameter: 500px;
+$diamTablet: 400px;
+$diamPhone: 300px;
 // @import "/img/tim_dolomites_opt.jpg";
 .Frontpage img {
   position: relative;
@@ -5,24 +8,32 @@
   image-orientation: from-image;
   width: 100%;
 }
-.Frontpage {
-  margin: 0;
-  background-image: url('~../img/tim_dolomites_opt.jpg');
+.background {
+  background-image: url('~../img/tim_hourgade.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: right;
+  background-position: center;
+  border-radius: 50%;
+  height: $diameter;
+  width: $diameter;
+  background-position: -135px 0px;
+  margin-top: 80px;
+}
+.Frontpage {
   min-height: 100vh;
-  min-width: 500px;
-  width: 100%;
-  height: auto;
+  margin: 0;
   position: relative;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  display: flex;
 }
 .textBlock {
   font-family: serif;
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 10vh;
+  top: 0px;
   color: $col-h3;
   // color: white;
   .webDevSpan {
@@ -31,8 +42,30 @@
   h2 {
     font-size: 3em;
     font-weight: bolder;
+    opacity: 0;
+    margin: 0;
+    @include animation (fadein, 2s,1s);
   }
   h3 {
     font-size: 2em;
+    margin: 30px 0 15px 0;
+    // @include animation (fadein, 2s);
+    .Im {
+      opacity: 0;
+      @include animation (fadein, 2s,0.5s);
+    }
+  }
+}
+@media screen and (max-height: 720px), (max-width:720px){
+  .background {
+    height: $diamTablet;
+    width: $diamTablet;
+  }
+}
+@media screen and (max-height: 600px), (max-width:600px){
+  .background {
+    height: $diamPhone;
+    width: $diamPhone;
+    background-position: -90px 0px;
   }
 }

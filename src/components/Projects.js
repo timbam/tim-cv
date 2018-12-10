@@ -33,7 +33,7 @@ export default (props) => {
         text={tidTxt}
         link="http://www.tid-bergen.no"
        />
-       <div onClick={() => props.scrollToElement(props.nextElement)} className="triangle"></div>
+       <a onClick={() => props.scrollToElement(props.nextElement)} className="triangle"></a>
     </div>
   );
 };

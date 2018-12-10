@@ -2,12 +2,12 @@
 export default (props) => {
     return (
       <div className="Frontpage" id="Frontpage">
+        <div className="background"></div>
         <div className="textBlock">
-          <h3>Hi, I'm</h3>
-          <h2>TIM BARBIER</h2>
-          <h3>a <span className="webDevSpan">Web Developer</span></h3>
+          <h3>Hi, <span className="Im">I'm</span></h3>
+          <h2>Tim Barbier</h2>
         </div>
-        <div onClick={() => props.scrollToElement(props.nextElement)} className="triangle"></div>
+        <a onClick={() => props.scrollToElement(props.nextElement)} className="triangle"></a>
       </div>
     );
 }

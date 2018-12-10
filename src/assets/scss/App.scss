@@ -1,17 +1,68 @@
 // Global variables
-$col-h3: #0e2953;
+$col-h3: #223760;
+$col-dotsArrows: #ed8f47;
+$col-text: #223760;
 $fontFam: helvetica, arial, sans-serif;
+// Animation mixins
+@mixin keyframes($animationName)
+{
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  // @-o-keyframes $animationName {
+  //   @content;
+  // }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+@mixin animation ($animation, $duration, $delay:0) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+// Animation
+@include keyframes (fadein)
+{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 // Imports
 @import 'Frontpage';
 @import 'Projects';
+@import 'About';
 @import 'OneProject';
 @import 'Courses';
+@import 'Navbar';
 
 body {
   margin: 0;
 }
 h2.title {
-  color: $col-h3;
+  color: $col-text;
   font-size: 2em;
 }
 .app {
@@ -24,20 +75,23 @@ h2.title {
   }
 }
 
-
 .triangle {
     position: absolute;
     bottom: 20px;
     left: 50%;
     border-right: 10px solid;
     border-bottom: 10px solid;
-    border-color: #da322ddb;
+    border-color: $col-dotsArrows;
     height: 30px;
     width: 30px;
     transform: rotate(45deg);
 }
+.Frontpage > .triangle {
+  opacity: 0;
+  @include animation(fadein, 1s, 2.5s);
+}
 .triangle:hover {
-  color: #da322ddb;
+  color: $col-dotsArrows;
   border-right: 12px solid;
   border-bottom: 12px solid;
   cursor: pointer;

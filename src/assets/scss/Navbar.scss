@@ -1,0 +1,56 @@
+.Navbar {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  right: 17px;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      display: block;
+      width: 16px;
+      height: 16px;
+      margin: 7px;
+      position: relative;
+      span {
+        position: absolute;
+        height: 8px;
+        width: 8px;
+        background: $col-dotsArrows;
+        border-radius: 50%;
+        border: 0;
+        left: 4px;
+        top: 4px;
+        z-index: 1;
+      }
+    }
+      li:hover{
+        cursor: pointer;
+        span {
+          height: 6px;
+          width: 6px;
+          background: none;
+          border-color: $col-dotsArrows;
+          border-radius: 50%;
+          border-style: solid;
+          border-width: 2px;
+          left: 2.5px;
+          top: 2.5px;
+        }
+    }
+    li.active{
+      span {
+        height: 6px;
+        width: 6px;
+        background: none;
+        border-color: $col-dotsArrows;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 2px;
+        left: 2.5px;
+        top: 2.5px;
+      }
+    }
+  }
+}

@@ -1,73 +1,97 @@
 import React from 'react';
 import * as Scroll from 'react-scroll';
-// import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
+import Navbar from './Navbar';
 import Frontpage from './Frontpage';
+import About from './About';
 import Projects from './Projects';
 import Courses from './Courses';
 import 'assets/scss/App.scss';
 
-let timeOut;
+let resizeTimeOut;
 
 class App extends React.PureComponent {
   constructor(props){
     super(props);
+
+    this.state = { clientHeight : 0,
+                   scrollHeight: 0,
+                   activeElement: 'Frontpage',
+                   elements: [
+                     {id: 'Frontpage',
+                      height: Number
+                    },
+                    {id: 'About',
+                      height: Number
+                    },
+                    {id: 'Projects',
+                    height: Number
+                    },
+                    {id: 'Courses',
+                    height: Number
+                    }
+                   ]
+                  };
+
     this.handleScroll.bind(this);
-    this.scrollToTop.bind(this);
-    this.state = { scrolling: false };
+    this.onResize.bind(this);
+    this.didResize.bind(this);
+    this.elTopPos.bind(this);
   }
 
   componentDidMount() {
-    Events.scrollEvent.register('begin', (to, element) => {
-      // console.log('begin', arguments);
-      this.setState({
-        scrolling: true
-      });
-    });
-
-    Events.scrollEvent.register('end', (to, element) => {
-      // console.log('end', arguments);
-      this.setState({
-        scrolling: false
-      });
-    });
     window.addEventListener('scroll', (e) => this.handleScroll(e));
-    scrollSpy.update();
-
+    window.addEventListener('resize', (e) => this.onResize(e));
+    this.didResize();
   }
 
   componentWillUnmount() {
-    Events.scrollEvent.remove('begin');
-    Events.scrollEvent.remove('end');
     window.removeEventListener('scroll');
-    clearTimeout(timeOut);
+    window.removeEventListener('resize');
   }
 
   handleScroll(e) {
     let { scrollTop, clientHeight, scrollHeight } = e.srcElement.scrollingElement;
-    // if(Math.abs((scrollTop/clientHeight) % 1 - 0.5) > 0.46 && !this.state.scrolling){
-    //   let yoyo = Math.round(scrollTop/clientHeight) * clientHeight;
-    //   // clearTimeout(timeOut);
-    //   console.log(yoyo);
-    //   timeOut = setTimeout(() => scroll.scrollTo(yoyo), 2500);
-    // }else{
-    //   console.log("yoyo")
-    //   clearTimeout(timeOut);
-    // }
-
-    // console.log(e.srcElement.scrollingElement)
-    // console.log(clientHeight);
-    // console.log(scrollHeight);
+    // console.log(100*scrollTop/(scrollHeight-clientHeight) + ' %')
+    let elements = this.state.elements;
+    for(let i = elements.length-1; i >= 0; i--){
+      if(scrollTop >= elements[i].height-50){
+        this.setState({
+          activeElement: elements[i].id
+        });
+        break;
+      }
+    }
+    // console.log(this.state.activeElement)
   }
 
-  scrollToTop() {
-    scroll.scrollToTop();
+  onResize(e) {
+    clearTimeout(resizeTimeOut);
+    resizeTimeOut = setTimeout(this.didResize.bind(this), 500)
+  }
+
+  didResize() {
+    let {scrollHeight, clientHeight } = document.scrollingElement;
+    let {elements} = this.state;
+    let height;
+    for(let i = 0; i < elements.length; i++) {
+      height = this.elTopPos(elements[i].id)
+      elements[i].height = height;
+    }
+    this.setState({
+      scrollHeight,
+      clientHeight,
+      elements
+    });
+    // console.log(this.state)
+  }
+
+  elTopPos(element) {
+    return document.getElementById(element).getBoundingClientRect().top + window.pageYOffset;
   }
 
   scrollToElement(element) {
-    console.log(element);
     let e = document.getElementById(element);
-    // console.log(e.scrollTop)
     e.scrollIntoView({
       behavior : "smooth"
     });
@@ -76,7 +100,14 @@ class App extends React.PureComponent {
   render() {
     return (
       <div className="app">
+        <Navbar scrollToElement={ this.scrollToElement.bind(this)}
+                elements={this.state.elements}
+                activeElement={this.state.activeElement}
+        />
         <Frontpage  scrollToElement={ this.scrollToElement.bind(this) }
+                    nextElement={'About'}  />
+
+        <About      scrollToElement={ this.scrollToElement.bind(this) }
                     nextElement={'Projects'}  />
 
         <Projects   scrollToElement={ this.scrollToElement.bind(this) }
